@@ -1,7 +1,8 @@
 name: Publish cht-conf Docker image
 
 on:
-  push: [tags]
+  push:
+    tags: ['v*']
 
 env:
   REGISTRY: ghcr.io
