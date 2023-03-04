@@ -9,6 +9,7 @@ RUN apt update \
       openssh-client \
       python3-pip \
       python3-setuptools \
+      sudo \
       xsltproc \
     # Remove chromium to save space. We only installed it to get the transitive dependencies that are needed
     # when running tests with puppeteer. (puppeteer-chromium-resolver will always download its own version of chromium)
@@ -21,6 +22,8 @@ RUN npm install -g cht-conf
 
 # Using the 1000:1000 user is recommended for VSCode dev containers
 # https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user
+RUN adduser node sudo  \
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER node
 
 WORKDIR /workdir
