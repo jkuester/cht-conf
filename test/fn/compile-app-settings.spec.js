@@ -1,13 +1,10 @@
-const chai = require('chai');
 const path = require('path');
 const sinon = require('sinon');
 const rewire = require('rewire');
 
 const fs = require('../../src/lib/sync-fs');
 const compileAppSettings = rewire('../../src/fn/compile-app-settings');
-const { expect } = chai;
-chai.use(require('chai-exclude'));
-chai.use(require('chai-as-promised'));
+const { expect } = require('chai');
 
 let writeJson;
 let environment;
@@ -130,6 +127,10 @@ const scenarios = [
     folder: 'android-app-links/invalid-file',
     error: 'Invalid assetlinks: ValidationError: "[0].target.sha256_cert_fingerprints" is required',
   },
+  {
+    description: 'should compile max_task_notifications to tasks.max_task_notifications',
+    folder: 'task-notifications/project',
+  }
 ];
 
 describe('compile-app-settings', () => {
